@@ -15,9 +15,9 @@ if TYPE_CHECKING:
 LOCATION_NAME_TO_ID = {
     "Hub Table": 1,
     "Hub Carrot": 2,
-    "Ame's Office Bubba 1 Location": 3,
-    "Ame's Office Bubba 2 Location": 4,
-    "Ame's Office Bubba 3 Location": 5,
+    "Ame Office Bubba 1 Location": 3,
+    "Ame Office Bubba 2 Location": 4,
+    "Ame Office Bubba 3 Location": 5,
     "Pekoland Bubba 1 Location": 6,
     "Pekoland Bubba 2 Location": 7,
     "Pekoland Bubba 3 Location": 8
@@ -57,7 +57,7 @@ def create_regular_locations(world: SmolAmeWorld) -> None:
     # Finally, we need to put the Locations ("checks") into their regions.
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
     hub = world.get_region("Hub")
-    ame_office = world.get_region("Ame's Office")
+    ame_office = world.get_region("Ame Office")
     pekoland = world.get_region("Pekoland")
     # right_room = world.get_region("Right Room")
 
@@ -83,7 +83,7 @@ def create_regular_locations(world: SmolAmeWorld) -> None:
     hub.add_locations(hub_locations, SmolAmeLocation)
 
     ame_office_locations = get_location_names_with_ids(
-        ["Ame's Office Bubba 1 Location", "Ame's Office Bubba 2 Location", "Ame's Office Bubba 3 Location"]
+        ["Ame Office Bubba 1 Location", "Ame Office Bubba 2 Location", "Ame Office Bubba 3 Location"]
     )
     ame_office.add_locations(ame_office_locations, SmolAmeLocation)
 

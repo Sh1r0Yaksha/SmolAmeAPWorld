@@ -11,18 +11,24 @@ if TYPE_CHECKING:
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
 # Even if an item doesn't exist on specific options, it must be present in this lookup.
 ITEM_NAME_TO_ID = {
-    "Ame's Office Button": 1,
+    "Ame Office Button": 1,
     "Pekoland Button": 2,
+    "Ame Office Bubba 1": 3,
+    "Ame Office Bubba 2": 4,
+    "Ame Office Bubba 3": 5,
+    "Pekoland Bubba 1": 6,
+    "Pekoland Bubba 2": 7,
+    "Pekoland Bubba 3": 8,
 }
 
 # Items should have a defined default classification.
 # In our case, we will make a dictionary from item name to classification.
 DEFAULT_ITEM_CLASSIFICATIONS = {
-    "Ame's Office Button": ItemClassification.progression,
+    "Ame Office Button": ItemClassification.progression,
     "Pekoland Button": ItemClassification.progression,
-    "Ame's Office Bubba 1": ItemClassification.filler,
-    "Ame's Office Bubba 2": ItemClassification.filler,
-    "Ame's Office Bubba 3": ItemClassification.filler,
+    "Ame Office Bubba 1": ItemClassification.filler,
+    "Ame Office Bubba 2": ItemClassification.filler,
+    "Ame Office Bubba 3": ItemClassification.filler,
     "Pekoland Bubba 1": ItemClassification.filler,
     "Pekoland Bubba 2": ItemClassification.filler,
     "Pekoland Bubba 3": ItemClassification.filler,
@@ -56,19 +62,19 @@ class SmolAmeItem(Item):
 #     return "Confetti Cannon"
 
 
-# def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
+def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
 #     # Our world class must have a create_item() function that can create any of our items by name at any time.
 #     # So, we make this helper function that creates the item by name with the correct classification.
 #     # Note: This function's content could just be the contents of world.create_item in world.py directly,
 #     # but it seemed nicer to have it in its own function over here in items.py.
-#     classification = DEFAULT_ITEM_CLASSIFICATIONS[name]
+    classification = DEFAULT_ITEM_CLASSIFICATIONS[name]
 
 #     # It is perfectly normal and valid for an item's classification to differ based on the player's options.
 #     # In our case, Health Upgrades are only relevant to logic (and thus labeled as "progression") in hard mode.
 #     if name == "Health Upgrade" and world.options.hard_mode:
 #         classification = ItemClassification.progression
 
-#     return SmolAmeItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
+    return SmolAmeItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
 
 # With those two helper functions defined, let's now get to actually creating and submitting our itempool.
@@ -83,16 +89,16 @@ def create_all_items(world: SmolAmeWorld) -> None:
     # First, we create a list containing all the items that always exist.
 
     itempool: list[Item] = [
-        world.create_item("Level Button"),
-        world.create_item("Level Button"),
+        world.create_item("Ame Office Button"),
+        world.create_item("Pekoland Button"),
         # world.create_item("Sword"),
         # world.create_item("Shield"),
-        world.create_item("Bubba"),
-        world.create_item("Bubba"),
-        world.create_item("Bubba"),
-        world.create_item("Bubba"),
-        world.create_item("Bubba"),
-        world.create_item("Bubba"),
+        world.create_item("Ame Office Bubba 1"),
+        world.create_item("Ame Office Bubba 2"),
+        world.create_item("Ame Office Bubba 3"),
+        world.create_item("Pekoland Bubba 1"),
+        world.create_item("Pekoland Bubba 2"),
+        world.create_item("Pekoland Bubba 3"),
         # world.create_item("Health Upgrade"),
     ]
 

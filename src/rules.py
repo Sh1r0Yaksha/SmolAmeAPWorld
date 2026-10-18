@@ -24,7 +24,7 @@ def set_all_rules(world: SmolAmeWorld) -> None:
 
 def set_all_entrance_rules(world: SmolAmeWorld) -> None:
     # First, we need to actually grab our entrances. Luckily, there is a helper method for this.
-    hub_to_ame_office = world.get_entrance("Hub to Ame's Office")
+    # hub_to_ame_office = world.get_entrance("Hub to Ame Office")
     hub_to_pekoland = world.get_entrance("Hub to Pekoland")
     # right_room_to_final_boss_room = world.get_entrance("Right Room to Final Boss Room")
 
@@ -39,7 +39,7 @@ def set_all_entrance_rules(world: SmolAmeWorld) -> None:
     # The easiest way to do this is by calling world.set_rule, which works for both Locations and Entrances.
     # world.set_rule(overworld_to_bottom_right_room, can_destroy_bush)
 
-    has_ao_bubba = HasAll("Ame's Office Bubba 1", "Ame's Office Bubba 2", "Ame's Office Bubba 3")
+    has_ao_bubba = HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3")
     world.set_rule(hub_to_pekoland, has_ao_bubba)
 
     # Conditions can also depend on event items.
@@ -143,7 +143,7 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
 #     # In our case, we went for the Victory event design pattern (see create_events() in locations.py).
 #     # So lets undo what we just did, and instead set the completion condition to:
 #     world.set_completion_rule(Has("Victory"))
-    world.set_completion_rule(HasAll("Ame's Office Bubba 1", "Ame's Office Bubba 2", "Ame's Office Bubba 3", "Pekoland Bubba 1", "Pekoland Bubba 2", "Pekoland Bubba 3"))
+    world.set_completion_rule(HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3", "Pekoland Bubba 1", "Pekoland Bubba 2", "Pekoland Bubba 3"))
 
 # One final comment about rules:
 # If your world exclusively uses Rule Builder rules (like APQuest), it's worth trying CachedRuleBuilderWorld.

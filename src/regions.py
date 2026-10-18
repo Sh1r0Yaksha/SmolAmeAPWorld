@@ -25,7 +25,7 @@ def create_and_connect_regions(world: SmolAmeWorld) -> None:
 def create_all_regions(world: SmolAmeWorld) -> None:
     # Creating a region is as simple as calling the constructor of the Region class.
     hub = Region("Hub", world.player, world.multiworld)
-    ame_office = Region("Ame's Office", world.player, world.multiworld)
+    ame_office = Region("Ame Office", world.player, world.multiworld)
     pekoland = Region("Pekoland", world.player, world.multiworld)
     # right_room = Region("Right Room", world.player, world.multiworld)
     # final_boss_room = Region("Final Boss Room", world.player, world.multiworld)
@@ -49,7 +49,7 @@ def connect_regions(world: SmolAmeWorld) -> None:
     # Luckily, once you've submitted your regions to multiworld.regions,
     # you can get them at any time using world.get_region(...).
     hub = world.get_region("Hub")
-    ame_office = world.get_region("Ame's Office")
+    ame_office = world.get_region("Ame Office")
     pekoland = world.get_region("Pekoland")
     # right_room = world.get_region("Right Room")
     # final_boss_room = world.get_region("Final Boss Room")
@@ -63,7 +63,7 @@ def connect_regions(world: SmolAmeWorld) -> None:
     # # You can then connect the Entrance to the target region.
     # overworld_to_bottom_right_room.connect(bottom_right_room)
 
-    hub_to_ame_office = Entrance(world.player, "Hub to Ame's Office", parent=hub)
+    hub_to_ame_office = Entrance(world.player, "Hub to Ame Office", parent=hub)
     hub_to_ame_office.connect(ame_office)
 
     # An even easier way is to use the region.connect helper.
