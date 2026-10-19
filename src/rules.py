@@ -27,6 +27,7 @@ def set_all_rules(world: SmolAmeWorld) -> None:
 
     # set_all_entrance_rules(world)
     # set_all_location_rules(world)
+    set_item_placement_rules(world)
     set_completion_condition(world)
 
 
@@ -140,38 +141,81 @@ def set_all_rules(world: SmolAmeWorld) -> None:
     # Finally, we apply the rule to our "Final Boss Defeated" event location.
     # final_boss = world.get_location("Final Boss Defeated")
     # world.set_rule(final_boss, can_defeat_final_boss)
+def set_item_placement_rules(world: SmolAmeWorld) -> None:
+    for region in world.multiworld.get_regions(world.player):
+        if region.name != "hub":
+            for location in region.locations:
+                location.item_rule = (
+                    lambda item: item.name != "level_entry_button"
+                )
 
 
 def set_completion_condition(world: SmolAmeWorld) -> None:
-#     # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.
-#     # For this, we can use world.set_completion_rule.
-#     # You can just set a completion condition directly like any other condition, referencing items the player receives:
-#     world.set_completion_rule(HasAll("Sword", "Shield"))
-    mom_locations = []
-    bubba_locations = []
-    stache_quota_locations = []
-    for item_name, data in items.items():
-        for region_name, quantity in data["quantity"].items():
-            for i in range(quantity):
-                if item_name == "mom_button":
-                    mom_locations.append(f"{region_name}_{item_name}_{i}")
-                if item_name == "bubba":
-                    bubba_locations.append(f"{region_name}_{item_name}_{i}")
-                if item_name == "stache_quota":
-                    stache_quota_locations.append(f"{region_name}_{item_name}_{i}")
-                
-    bubba_completion = mom_locations + bubba_locations
-    cc_completion = bubba_completion + stache_quota_locations
+    mom_button_count = 0
+    bubba_count = 0
+    stache_quota_count = 0
 
+    for item_name, data in items.items():
+        for quantity in data["quantity"].values():
+            if item_name == "mom_button":
+                mom_button_count += quantity
+            elif item_name == "bubba":
+                bubba_count += quantity
+            elif item_name == "stache_quota":
+                stache_quota_count += quantity
+                
     match world.options.game_mode:
-            case smolame_options.GameMode.option_any:
-                world.set_completion_rule(HasAll(*mom_locations))
-            case smolame_options.GameMode.option_all_stages:
-                world.set_completion_rule(HasAll(*mom_locations))
-            case smolame_options.GameMode.option_bubba:
-                world.set_completion_rule(HasAll(*bubba_completion))
-            case smolame_options.GameMode.option_cc:
-                world.set_completion_rule(HasAll(*cc_completion))
+        case smolame_options.GameMode.option_any:
+            world.set_completion_rule(
+                Has("mom_button", count=mom_button_count)
+            )
+        case smolame_options.GameMode.option_all_stages:
+            world.set_completion_rule(
+                Has("mom_button", count=mom_button_count)
+            )
+        case smolame_options.GameMode.option_bubba:
+            world.set_completion_rule(
+                Has("mom_button", count=mom_button_count)
+                & Has("bubba", count=bubba_count)
+            )
+        case smolame_options.GameMode.option_cc:
+            world.set_completion_rule(
+                Has("mom_button", count=mom_button_count)
+                & Has("bubba", count=bubba_count)
+                & Has("stache_quota", count=stache_quota_count)
+            )
+
+
+# def set_completion_condition(world: SmolAmeWorld) -> None:
+# #     # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.
+# #     # For this, we can use world.set_completion_rule.
+# #     # You can just set a completion condition directly like any other condition, referencing items the player receives:
+# #     world.set_completion_rule(HasAll("Sword", "Shield"))
+#     mom_locations = []
+#     bubba_locations = []
+#     stache_quota_locations = []
+#     for item_name, data in items.items():
+#         for region_name, quantity in data["quantity"].items():
+#             for i in range(quantity):
+#                 if item_name == "mom_button":
+#                     mom_locations.append(f"{region_name}_{item_name}_{i}")
+#                 if item_name == "bubba":
+#                     bubba_locations.append(f"{region_name}_{item_name}_{i}")
+#                 if item_name == "stache_quota":
+#                     stache_quota_locations.append(f"{region_name}_{item_name}_{i}")
+                
+#     bubba_completion = mom_locations + bubba_locations
+#     cc_completion = bubba_completion + stache_quota_locations
+
+#     match world.options.game_mode:
+#             case smolame_options.GameMode.option_any:
+#                 world.set_completion_rule(HasAll(*mom_locations))
+#             case smolame_options.GameMode.option_all_stages:
+#                 world.set_completion_rule(HasAll(*mom_locations))
+#             case smolame_options.GameMode.option_bubba:
+#                 world.set_completion_rule(HasAll(*bubba_completion))
+#             case smolame_options.GameMode.option_cc:
+#                 world.set_completion_rule(HasAll(*cc_completion))
 
 #     # In our case, we went for the Victory event design pattern (see create_events() in locations.py).
 #     # So lets undo what we just did, and instead set the completion condition to:
