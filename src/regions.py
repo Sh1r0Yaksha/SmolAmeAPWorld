@@ -29,11 +29,14 @@ def create_and_connect_regions(world: SmolAmeWorld) -> None:
 
 
 def create_all_regions(world: SmolAmeWorld) -> None:
+
+    multiworld_regions = []
     
     for name, connection in regions.items():
         region = Region(name, world.player, world.multiworld)
-        world.multiworld.regions += region
-    
+        multiworld_regions.append(region)
+
+    world.multiworld.regions += multiworld_regions    
 
     # # Creating a region is as simple as calling the constructor of the Region class.
     # hub = Region("Hub", world.player, world.multiworld)

@@ -7,9 +7,10 @@ from typing import TYPE_CHECKING
 from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
+from . import options as smolame_options  # rename due to a name conflict with World.options
+
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
-    import options
 
 items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
@@ -163,13 +164,13 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
     cc_completion = bubba_completion + stache_quota_locations
 
     match world.options.game_mode:
-            case options.GameMode.option_any:
+            case smolame_options.GameMode.option_any:
                 world.set_completion_rule(HasAll(*mom_locations))
-            case options.GameMode.option_all_stages:
+            case smolame_options.GameMode.option_all_stages:
                 world.set_completion_rule(HasAll(*mom_locations))
-            case options.GameMode.option_bubba:
+            case smolame_options.GameMode.option_bubba:
                 world.set_completion_rule(HasAll(*bubba_completion))
-            case options.GameMode.option_cc:
+            case smolame_options.GameMode.option_cc:
                 world.set_completion_rule(HasAll(*cc_completion))
 
 #     # In our case, we went for the Victory event design pattern (see create_events() in locations.py).

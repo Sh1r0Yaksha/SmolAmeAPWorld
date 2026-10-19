@@ -6,9 +6,10 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
 
+from . import options as smolame_options  # rename due to a name conflict with World.options
+
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
-    import options
 
 items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
@@ -71,13 +72,13 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
 #     # Note: This function's content could just be the contents of world.create_item in world.py directly,
 #     # but it seemed nicer to have it in its own function over here in items.py.
     match world.options.game_mode:
-        case options.GameMode.option_any:
+        case smolame_options.GameMode.option_any:
             classification = items[name]["classification"]["any"]
-        case options.GameMode.option_all_stages:
+        case smolame_options.GameMode.option_all_stages:
             classification = items[name]["classification"]["all_stages"]
-        case options.GameMode.option_bubba:
+        case smolame_options.GameMode.option_bubba:
             classification = items[name]["classification"]["bubba"]
-        case options.GameMode.option_cc:
+        case smolame_options.GameMode.option_cc:
             classification = items[name]["classification"]["cc"]
 
     classification_type = {
