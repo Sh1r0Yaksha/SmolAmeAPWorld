@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 regions_path = Path(__file__).parent / "regions.json"
 with regions_path.open("r", encoding="utf-8") as file:
-    regions = json.load(regions_path)
+    regions = json.load(file)
 
 # A region is a container for locations ("checks"), which connects to other regions via "Entrance" objects.
 # Many games will model their Regions after physical in-game places, but you can also have more abstract regions.

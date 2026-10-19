@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
-    items = json.load(items_path)
+    items = json.load(file)
 
 # Every item must have a unique integer ID associated with it.
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.

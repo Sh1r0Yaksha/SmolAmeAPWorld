@@ -10,11 +10,11 @@ from BaseClasses import ItemClassification, Location
 
 items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
-    items = json.load(items_path)
+    items = json.load(file)
 
 regions_path = Path(__file__).parent / "regions.json"
 with regions_path.open("r", encoding="utf-8") as file:
-    regions = json.load(regions_path)
+    regions = json.load(file)
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld

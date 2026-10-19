@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
-    items = json.load(items_path)
+    items = json.load(file)
 
 # HAS_KEY = Has("Key")  # Hmm, what could this be? A little foreshadowing perhaps? :) You'll find out if you keep reading!
 
