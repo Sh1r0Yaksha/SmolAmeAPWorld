@@ -24,6 +24,10 @@ with items_path.open("r", encoding="utf-8") as file:
 #     "stache": 4
 # }
 
+ITEM_NAME_TO_ID = {}
+
+for item_name, data in items.items():
+    ITEM_NAME_TO_ID[item_name] = data["id"]
 # Items should have a defined default classification.
 # In our case, we will make a dictionary from item name to classification.
 # DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -67,13 +71,13 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
 #     # Note: This function's content could just be the contents of world.create_item in world.py directly,
 #     # but it seemed nicer to have it in its own function over here in items.py.
     match world.options.game_mode:
-        case options.GameMode.any:
+        case options.GameMode.option_any:
             classification = items[name]["classification"]["any"]
-        case options.GameMode.all_stages:
+        case options.GameMode.option_all_stages:
             classification = items[name]["classification"]["all_stages"]
-        case options.GameMode.bubba:
+        case options.GameMode.option_bubba:
             classification = items[name]["classification"]["bubba"]
-        case options.GameMode.cc:
+        case options.GameMode.option_cc:
             classification = items[name]["classification"]["cc"]
 
     classification_type = {

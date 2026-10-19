@@ -163,13 +163,13 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
     cc_completion = bubba_completion + stache_quota_locations
 
     match world.options.game_mode:
-            case options.GameMode.any:
+            case options.GameMode.option_any:
                 world.set_completion_rule(HasAll(*mom_locations))
-            case options.GameMode.all_stages:
+            case options.GameMode.option_all_stages:
                 world.set_completion_rule(HasAll(*mom_locations))
-            case options.GameMode.bubba:
+            case options.GameMode.option_bubba:
                 world.set_completion_rule(HasAll(*bubba_completion))
-            case options.GameMode.cc:
+            case options.GameMode.option_cc:
                 world.set_completion_rule(HasAll(*cc_completion))
 
 #     # In our case, we went for the Victory event design pattern (see create_events() in locations.py).

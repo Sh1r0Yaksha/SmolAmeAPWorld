@@ -91,13 +91,13 @@ class GameMode(Choice):
 
     display_name = "Game Mode"
 
-    any = 0
-    all_stages = 1
-    bubba = 2
-    cc = 3
+    option_any = 0
+    option_all_stages = 1
+    option_bubba = 2
+    option_cc = 3
 
     # Choice options must define an explicit default value.
-    default = any
+    default = option_any
 
     # For choices, you can also define aliases.
     # For example, we could make it so "player_sprite: kitty" resolves to "player_sprite: cat" like this:
