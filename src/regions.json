@@ -1,5 +1,5 @@
 {
-    "hub": ["ame_office", "pekoland"],
-    "ame_office": ["hub"],
-    "pekoland": ["hub"]
+    "Hub": ["Ame's Office", "Pekoland"],
+    "Ame's Office": ["Hub"],
+    "Pekoland": ["Hub"]
 }

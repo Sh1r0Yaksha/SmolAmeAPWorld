@@ -31,8 +31,8 @@ def create_all_regions(world: SmolAmeWorld) -> None:
 
 
 def connect_regions(world: SmolAmeWorld) -> None:
-    for name, connections in regions.items():
-        region = world.get_region(name)
-        for connection_name in connections:
-            connection = world.get_region(connection_name)
-            region.connect(connection, f" {region}_to_{connection_name}")
+    for region_name, connections in regions.items():
+        region = world.get_region(region_name)
+        for connected_region in connections:
+            connection = world.get_region(connected_region)
+            region.connect(connection, f" {region} to {connected_region}")

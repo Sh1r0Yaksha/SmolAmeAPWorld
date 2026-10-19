@@ -1,0 +1,20 @@
+{
+    "Hub": {
+        "AO Entry": "On the Table",
+        "Pekoland Entry": "On the Carrot"
+    },
+    "Ame's Office": {
+        "MOM": "At the End of Level",
+        "Bubba 1": "Second Bookstack",
+        "Bubba 2": "Under Table",
+        "Bubba 3": "On the Planes/Corkboard",
+        "Stache Quota": "On Collecting XX Staches"
+    },
+    "Pekoland": {
+        "MOM": "At the End of Level",
+        "Bubba 1": "On the Top carrot after slide",
+        "Bubba 2": "Between Spikes before Checkpoint 2",
+        "Bubba 3": "Through the Spikes",
+        "Stache Quota": "On Collecting XX Staches"
+    }
+}

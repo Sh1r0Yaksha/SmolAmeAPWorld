@@ -22,11 +22,15 @@ LOCATION_NAME_TO_ID = {}
 location_id = 0
 
 for item_name, data in items.items():
-    for region_name, quantity in data["quantity"].items():
-        for i in range(quantity):
-            LOCATION_NAME_TO_ID[f"{region_name}_{item_name}_{i}"] = location_id
+    if "Area" in data:
+        for region_name, locations in data["Area"].items():
+            for location_name in locations:
+                LOCATION_NAME_TO_ID[f"{region_name}-{location_name}"] = location_id
+                location_id += 1
+    else:
+        for region_name in regions:
+            LOCATION_NAME_TO_ID[f"{region_name}-{item_name}"] = location_id
             location_id += 1
-
 
 class SmolAmeLocation(Location):
     game = "Smol Ame"
@@ -43,11 +47,16 @@ def create_all_locations(world: SmolAmeWorld) -> None:
 
 
 def create_regular_locations(world: SmolAmeWorld) -> None:
-
     for item_name, data in items.items():
-        for region_name, quantity in data["quantity"].items():
-            region = world.get_region(region_name)
-            for i in range(quantity):
-                location_name = f"{region_name}_{item_name}_{i}"
-                region_location = get_location_name_with_id(location_name)
-                region.add_locations(region_location, SmolAmeLocation)
+        if "Area" in data:
+            for region_name, locations in data["Area"].items():
+                region = world.get_region(region_name)
+                for location_name in locations:
+                    location_name_id = get_location_name_with_id(f"{region_name}-{location_name}")
+                    region.add_locations(location_name_id, SmolAmeLocation)
+        else:
+            for region_name in regions:
+                location_name_id = get_location_name_with_id(f"{region_name}-{item_name}")
+                region = world.get_region(region_name)
+                region.add_locations(location_name_id, SmolAmeLocation)
+                
