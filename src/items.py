@@ -1,4 +1,6 @@
 from __future__ import annotations
+import json
+from pathlib import Path
 
 from typing import TYPE_CHECKING
 
@@ -6,38 +8,35 @@ from BaseClasses import Item, ItemClassification
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
+    import options
+
+items_path = Path(__file__).parent / "items.json"
+with items_path.open("r", encoding="utf-8") as file:
+    items = json.load(items_path)
 
 # Every item must have a unique integer ID associated with it.
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
 # Even if an item doesn't exist on specific options, it must be present in this lookup.
-ITEM_NAME_TO_ID = {
-    "Ame Office Button": 1,
-    "Pekoland Button": 2,
-    "Ame Office Bubba 1": 3,
-    "Ame Office Bubba 2": 4,
-    "Ame Office Bubba 3": 5,
-    "Pekoland Bubba 1": 6,
-    "Pekoland Bubba 2": 7,
-    "Pekoland Bubba 3": 8,
-}
+# ITEM_NAME_TO_ID = {
+#     "level_entry_button": 1,
+#     "mom_button": 2,
+#     "bubba": 3,
+#     "stache": 4
+# }
 
 # Items should have a defined default classification.
 # In our case, we will make a dictionary from item name to classification.
-DEFAULT_ITEM_CLASSIFICATIONS = {
-    "Ame Office Button": ItemClassification.progression,
-    "Pekoland Button": ItemClassification.progression,
-    "Ame Office Bubba 1": ItemClassification.filler,
-    "Ame Office Bubba 2": ItemClassification.filler,
-    "Ame Office Bubba 3": ItemClassification.filler,
-    "Pekoland Bubba 1": ItemClassification.filler,
-    "Pekoland Bubba 2": ItemClassification.filler,
-    "Pekoland Bubba 3": ItemClassification.filler,
-    # "Shield": ItemClassification.progression | ItemClassification.useful,  # Items can have multiple classifications.
-    # "Hammer": ItemClassification.progression,
-    # "Health Upgrade": ItemClassification.useful,
-    # "Confetti Cannon": ItemClassification.filler,
-    # "Math Trap": ItemClassification.trap,
-}
+# DEFAULT_ITEM_CLASSIFICATIONS = {
+#     "level_entry_button": ItemClassification.progression,
+#     "mom_button": ItemClassification.progression,
+#     "bubba": ItemClassification.filler,
+#     "stache": ItemClassification.filler,
+#     # "Shield": ItemClassification.progression | ItemClassification.useful,  # Items can have multiple classifications.
+#     # "Hammer": ItemClassification.progression,
+#     # "Health Upgrade": ItemClassification.useful,
+#     # "Confetti Cannon": ItemClassification.filler,
+#     # "Math Trap": ItemClassification.trap,
+# }
 
 
 # Each Item instance must correctly report the "game" it belongs to.
@@ -67,14 +66,27 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
 #     # So, we make this helper function that creates the item by name with the correct classification.
 #     # Note: This function's content could just be the contents of world.create_item in world.py directly,
 #     # but it seemed nicer to have it in its own function over here in items.py.
-    classification = DEFAULT_ITEM_CLASSIFICATIONS[name]
+    match world.options.game_mode:
+        case options.GameMode.any:
+            classification = items[name]["classification"]["any"]
+        case options.GameMode.all_stages:
+            classification = items[name]["classification"]["all_stages"]
+        case options.GameMode.bubba:
+            classification = items[name]["classification"]["bubba"]
+        case options.GameMode.cc:
+            classification = items[name]["classification"]["cc"]
+
+    classification_type = {
+        "filler": ItemClassification.filler,
+        "progression": ItemClassification.progression,
+    }[classification]
 
 #     # It is perfectly normal and valid for an item's classification to differ based on the player's options.
 #     # In our case, Health Upgrades are only relevant to logic (and thus labeled as "progression") in hard mode.
 #     if name == "Health Upgrade" and world.options.hard_mode:
 #         classification = ItemClassification.progression
 
-    return SmolAmeItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
+    return SmolAmeItem(name, classification_type, items[name]["id"], world.player)
 
 
 # With those two helper functions defined, let's now get to actually creating and submitting our itempool.
@@ -88,19 +100,26 @@ def create_all_items(world: SmolAmeWorld) -> None:
     # Creating items should generally be done via the world's create_item method.
     # First, we create a list containing all the items that always exist.
 
-    itempool: list[Item] = [
-        world.create_item("Ame Office Button"),
-        world.create_item("Pekoland Button"),
-        # world.create_item("Sword"),
-        # world.create_item("Shield"),
-        world.create_item("Ame Office Bubba 1"),
-        world.create_item("Ame Office Bubba 2"),
-        world.create_item("Ame Office Bubba 3"),
-        world.create_item("Pekoland Bubba 1"),
-        world.create_item("Pekoland Bubba 2"),
-        world.create_item("Pekoland Bubba 3"),
-        # world.create_item("Health Upgrade"),
-    ]
+    itempool: list[Item] = []
+    
+    for name, data in items.items():
+        for region, quantity in data["quantity"].items():
+            for _ in range(quantity):
+                itempool.append(world.create_item(name))
+
+    # itempool: list[Item] = [
+    #     world.create_item("level_entry_button"),
+    #     world.create_item("level_entry_button"),
+    #     # world.create_item("Sword"),
+    #     # world.create_item("Shield"),
+    #     world.create_item("bubba"),
+    #     world.create_item("bubba"),
+    #     world.create_item("bubba"),
+    #     world.create_item("bubba"),
+    #     world.create_item("bubba"),
+    #     world.create_item("bubba"),
+    #     # world.create_item("Health Upgrade"),
+    # ]
 
     # Some items may only exist if the player enables certain options.
     # In our case, If the hammer option is enabled, the sixth item is the Hammer.

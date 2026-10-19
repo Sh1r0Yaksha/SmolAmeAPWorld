@@ -1,0 +1,56 @@
+{
+  "bubba": {
+    "id": 1,
+    "quantity": {
+        "ame_office": 3,
+        "pekoland": 3
+    },
+    "classification": {
+        "any": "filler",
+        "all_stages": "filler",
+        "bubba": "progression",
+        "cc": "progression"
+    }
+  },
+
+  "stache_quota":{
+    "id": 2,
+    "quantity": {
+        "ame_office": 1,
+        "pekoland": 1
+    },
+    "classification": {
+        "any": "filler",
+        "all_stages": "filler",
+        "bubba": "filler",
+        "cc": "progression"
+    }
+  },
+
+  "mom_button": {
+    "id": 3,
+    "quantity": {
+        "ame_office": 1,
+        "pekoland": 1
+    },
+    "classification": {
+        "any": "progression",
+        "all_stages": "progression",
+        "bubba": "progression",
+        "cc": "progression"
+    }
+  },
+
+  "level_entry_button": {
+    "id": 4,
+    "quantity": {
+        "hub": 1
+    },
+    "classification": {
+        "any": "progression",
+        "all_stages": "progression",
+        "bubba": "progression",
+        "cc": "progression"
+    }
+  }
+}

@@ -1,10 +1,20 @@
 from __future__ import annotations
+import json
+from pathlib import Path
 
 from typing import TYPE_CHECKING
 
 from BaseClasses import ItemClassification, Location
 
-from . import items
+# from . import items
+
+items_path = Path(__file__).parent / "items.json"
+with items_path.open("r", encoding="utf-8") as file:
+    items = json.load(items_path)
+
+regions_path = Path(__file__).parent / "regions.json"
+with regions_path.open("r", encoding="utf-8") as file:
+    regions = json.load(regions_path)
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
@@ -12,24 +22,34 @@ if TYPE_CHECKING:
 # Every location must have a unique integer ID associated with it.
 # We will have a lookup from location name to ID here that, in world.py, we will import and bind to the world class.
 # Even if a location doesn't exist on specific options, it must be present in this lookup.
-LOCATION_NAME_TO_ID = {
-    "Hub Table": 1,
-    "Hub Carrot": 2,
-    "Ame Office Bubba 1 Location": 3,
-    "Ame Office Bubba 2 Location": 4,
-    "Ame Office Bubba 3 Location": 5,
-    "Pekoland Bubba 1 Location": 6,
-    "Pekoland Bubba 2 Location": 7,
-    "Pekoland Bubba 3 Location": 8
-    # "Top Left Room Chest": 1,
-    # "Top Middle Chest": 2,
-    # "Bottom Left Chest": 3,
-    # "Bottom Left Extra Chest": 4,
-    # "Bottom Right Room Left Chest": 5,
-    # "Bottom Right Room Right Chest": 6,
-    # # Location IDs don't need to be sequential, as long as they're unique and greater than 0.
-    # "Right Room Enemy Drop": 10,
-}
+# LOCATION_NAME_TO_ID = {
+#     "Hub Table": 1,
+#     "Hub Carrot": 2,
+#     "Ame Office Bubba 1 Location": 3,
+#     "Ame Office Bubba 2 Location": 4,
+#     "Ame Office Bubba 3 Location": 5,
+#     "Pekoland Bubba 1 Location": 6,
+#     "Pekoland Bubba 2 Location": 7,
+#     "Pekoland Bubba 3 Location": 8
+#     # "Top Left Room Chest": 1,
+#     # "Top Middle Chest": 2,
+#     # "Bottom Left Chest": 3,
+#     # "Bottom Left Extra Chest": 4,
+#     # "Bottom Right Room Left Chest": 5,
+#     # "Bottom Right Room Right Chest": 6,
+#     # # Location IDs don't need to be sequential, as long as they're unique and greater than 0.
+#     # "Right Room Enemy Drop": 10,
+# }
+
+LOCATION_NAME_TO_ID = {}
+
+location_id = 0
+
+for item_name, data in items.items():
+    for region_name, quantity in data["quantity"].items():
+        for i in range(quantity):
+            LOCATION_NAME_TO_ID[f"{region_name}_{item_name}_{i}"] = location_id
+            location_id += 1
 
 
 # Each Location instance must correctly report the "game" it belongs to.
@@ -47,6 +67,8 @@ class SmolAmeLocation(Location):
 def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
     return {location_name: LOCATION_NAME_TO_ID[location_name] for location_name in location_names}
 
+def get_location_name_with_id(location_name: str) -> dict[str, int | None]:
+    return {location_name: LOCATION_NAME_TO_ID[location_name]}
 
 def create_all_locations(world: SmolAmeWorld) -> None:
     create_regular_locations(world)
@@ -54,11 +76,20 @@ def create_all_locations(world: SmolAmeWorld) -> None:
 
 
 def create_regular_locations(world: SmolAmeWorld) -> None:
+
+    for item_name, data in items.items():
+        for region_name, quantity in data["quantity"].items():
+            region = world.get_region(region_name)
+            for i in range(quantity):
+                location_name = f"{region_name}_{item_name}_{i}"
+                region_location = get_location_name_with_id(location_name)
+                region.add_locations(region_location, SmolAmeLocation)
+
     # Finally, we need to put the Locations ("checks") into their regions.
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
-    hub = world.get_region("Hub")
-    ame_office = world.get_region("Ame Office")
-    pekoland = world.get_region("Pekoland")
+    # hub = world.get_region("Hub")
+    # ame_office = world.get_region("Ame Office")
+    # pekoland = world.get_region("Pekoland")
     # right_room = world.get_region("Right Room")
 
     # # One way to create locations is by just creating them directly via their constructor.
@@ -77,20 +108,20 @@ def create_regular_locations(world: SmolAmeWorld) -> None:
     #     ["Bottom Right Room Left Chest", "Bottom Right Room Right Chest"]
     # )
     # bottom_right_room.add_locations(bottom_right_room_locations, APQuestLocation)
-    hub_locations = get_location_names_with_ids(
-        ["Hub Table", "Hub Carrot"]
-    )
-    hub.add_locations(hub_locations, SmolAmeLocation)
+    # hub_locations = get_location_names_with_ids(
+    #     ["Hub Table", "Hub Carrot"]
+    # )
+    # hub.add_locations(hub_locations, SmolAmeLocation)
 
-    ame_office_locations = get_location_names_with_ids(
-        ["Ame Office Bubba 1 Location", "Ame Office Bubba 2 Location", "Ame Office Bubba 3 Location"]
-    )
-    ame_office.add_locations(ame_office_locations, SmolAmeLocation)
+    # ame_office_locations = get_location_names_with_ids(
+    #     ["Ame Office Bubba 1 Location", "Ame Office Bubba 2 Location", "Ame Office Bubba 3 Location"]
+    # )
+    # ame_office.add_locations(ame_office_locations, SmolAmeLocation)
 
-    pekoland_locations = get_location_names_with_ids(
-        ["Pekoland Bubba 1 Location", "Pekoland Bubba 2 Location", "Pekoland Bubba 3 Location"]
-    )
-    pekoland.add_locations(pekoland_locations, SmolAmeLocation)
+    # pekoland_locations = get_location_names_with_ids(
+    #     ["Pekoland Bubba 1 Location", "Pekoland Bubba 2 Location", "Pekoland Bubba 3 Location"]
+    # )
+    # pekoland.add_locations(pekoland_locations, SmolAmeLocation)
     # top_left_room_locations = get_location_names_with_ids(["Top Left Room Chest"])
     # top_left_room.add_locations(top_left_room_locations, APQuestLocation)
 

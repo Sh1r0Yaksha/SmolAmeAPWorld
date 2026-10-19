@@ -91,13 +91,13 @@ class GameMode(Choice):
 
     display_name = "Game Mode"
 
-    option_any = 0
-    option_all_stages = 1
-    option_bubba = 2
-    option_cc = 3
+    any = 0
+    all_stages = 1
+    bubba = 2
+    cc = 3
 
     # Choice options must define an explicit default value.
-    default = option_any
+    default = any
 
     # For choices, you can also define aliases.
     # For example, we could make it so "player_sprite: kitty" resolves to "player_sprite: cat" like this:
@@ -150,3 +150,5 @@ class SmolAmeOptions(PerGameCommonOptions):
 #         "player_sprite": PlayerSprite.option_duck,
 #     },
 # }
+
+

@@ -51,7 +51,7 @@ class SmolAmeWorld(World):
 
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
-    origin_region_name = "Hub"
+    origin_region_name = "hub"
 
     # Our world class must have certain functions ("steps") that get called during generation.
     # The main ones are: create_regions, set_rules, create_items.
@@ -85,5 +85,5 @@ class SmolAmeWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return self.options.as_dict(
-            "all_stages", "bubba", "cc"
+            "any", "all_stages", "bubba", "cc"
         )

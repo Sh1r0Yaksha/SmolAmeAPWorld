@@ -1,4 +1,6 @@
 from __future__ import annotations
+import json
+from pathlib import Path
 
 from typing import TYPE_CHECKING
 
@@ -7,6 +9,11 @@ from rule_builder.rules import Has, HasAll, Rule
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
+    import options
+
+items_path = Path(__file__).parent / "items.json"
+with items_path.open("r", encoding="utf-8") as file:
+    items = json.load(items_path)
 
 # HAS_KEY = Has("Key")  # Hmm, what could this be? A little foreshadowing perhaps? :) You'll find out if you keep reading!
 
@@ -17,30 +24,30 @@ def set_all_rules(world: SmolAmeWorld) -> None:
     # Note: Regions do not have rules, the Entrances connecting them do!
     # We'll do entrances first, then locations, and then finally we set our victory condition.
 
-    set_all_entrance_rules(world)
+    # set_all_entrance_rules(world)
     # set_all_location_rules(world)
     set_completion_condition(world)
 
 
-def set_all_entrance_rules(world: SmolAmeWorld) -> None:
+# def set_all_entrance_rules(world: SmolAmeWorld) -> None:
     # First, we need to actually grab our entrances. Luckily, there is a helper method for this.
-    # hub_to_ame_office = world.get_entrance("Hub to Ame Office")
-    hub_to_pekoland = world.get_entrance("Hub to Pekoland")
-    # right_room_to_final_boss_room = world.get_entrance("Right Room to Final Boss Room")
+    # # hub_to_ame_office = world.get_entrance("Hub to Ame Office")
+    # hub_to_pekoland = world.get_entrance("Hub to Pekoland")
+    # # right_room_to_final_boss_room = world.get_entrance("Right Room to Final Boss Room")
 
-    # Now, let's make some rules!
-    # First, let's handle the transition from the overworld to the bottom right room,
-    # which requires slashing a bush with the Sword.
-    # For this, we need a rule that says "player has a Sword".
-    # We can use a "Has"-type rule from the rule_builder module for this.
-    # can_destroy_bush = Has("Sword")
+    # # Now, let's make some rules!
+    # # First, let's handle the transition from the overworld to the bottom right room,
+    # # which requires slashing a bush with the Sword.
+    # # For this, we need a rule that says "player has a Sword".
+    # # We can use a "Has"-type rule from the rule_builder module for this.
+    # # can_destroy_bush = Has("Sword")
 
-    # Now we can set our "can_destroy_bush" rule to the entrance which requires slashing a bush to clear the path.
-    # The easiest way to do this is by calling world.set_rule, which works for both Locations and Entrances.
-    # world.set_rule(overworld_to_bottom_right_room, can_destroy_bush)
+    # # Now we can set our "can_destroy_bush" rule to the entrance which requires slashing a bush to clear the path.
+    # # The easiest way to do this is by calling world.set_rule, which works for both Locations and Entrances.
+    # # world.set_rule(overworld_to_bottom_right_room, can_destroy_bush)
 
-    has_ao_bubba = HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3")
-    world.set_rule(hub_to_pekoland, has_ao_bubba)
+    # has_ao_bubba = HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3")
+    # world.set_rule(hub_to_pekoland, has_ao_bubba)
 
     # Conditions can also depend on event items.
     # button_pressed = Has("Top Left Room Button Pressed")
@@ -139,11 +146,36 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
 #     # For this, we can use world.set_completion_rule.
 #     # You can just set a completion condition directly like any other condition, referencing items the player receives:
 #     world.set_completion_rule(HasAll("Sword", "Shield"))
+    mom_locations = []
+    bubba_locations = []
+    stache_quota_locations = []
+    for item_name, data in items.items():
+        for region_name, quantity in data["quantity"].items():
+            for i in range(quantity):
+                if item_name == "mom_button":
+                    mom_locations.append(f"{region_name}_{item_name}_{i}")
+                if item_name == "bubba":
+                    bubba_locations.append(f"{region_name}_{item_name}_{i}")
+                if item_name == "stache_quota":
+                    stache_quota_locations.append(f"{region_name}_{item_name}_{i}")
+                
+    bubba_completion = mom_locations + bubba_locations
+    cc_completion = bubba_completion + stache_quota_locations
+
+    match world.options.game_mode:
+            case options.GameMode.any:
+                world.set_completion_rule(HasAll(*mom_locations))
+            case options.GameMode.all_stages:
+                world.set_completion_rule(HasAll(*mom_locations))
+            case options.GameMode.bubba:
+                world.set_completion_rule(HasAll(*bubba_completion))
+            case options.GameMode.cc:
+                world.set_completion_rule(HasAll(*cc_completion))
 
 #     # In our case, we went for the Victory event design pattern (see create_events() in locations.py).
 #     # So lets undo what we just did, and instead set the completion condition to:
 #     world.set_completion_rule(Has("Victory"))
-    world.set_completion_rule(HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3", "Pekoland Bubba 1", "Pekoland Bubba 2", "Pekoland Bubba 3"))
+    # world.set_completion_rule(HasAll("Ame Office Bubba 1", "Ame Office Bubba 2", "Ame Office Bubba 3", "Pekoland Bubba 1", "Pekoland Bubba 2", "Pekoland Bubba 3"))
 
 # One final comment about rules:
 # If your world exclusively uses Rule Builder rules (like APQuest), it's worth trying CachedRuleBuilderWorld.
