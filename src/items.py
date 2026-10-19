@@ -15,62 +15,15 @@ items_path = Path(__file__).parent / "items.json"
 with items_path.open("r", encoding="utf-8") as file:
     items = json.load(file)
 
-# Every item must have a unique integer ID associated with it.
-# We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
-# Even if an item doesn't exist on specific options, it must be present in this lookup.
-# ITEM_NAME_TO_ID = {
-#     "level_entry_button": 1,
-#     "mom_button": 2,
-#     "bubba": 3,
-#     "stache": 4
-# }
-
 ITEM_NAME_TO_ID = {}
 
 for item_name, data in items.items():
     ITEM_NAME_TO_ID[item_name] = data["id"]
-# Items should have a defined default classification.
-# In our case, we will make a dictionary from item name to classification.
-# DEFAULT_ITEM_CLASSIFICATIONS = {
-#     "level_entry_button": ItemClassification.progression,
-#     "mom_button": ItemClassification.progression,
-#     "bubba": ItemClassification.filler,
-#     "stache": ItemClassification.filler,
-#     # "Shield": ItemClassification.progression | ItemClassification.useful,  # Items can have multiple classifications.
-#     # "Hammer": ItemClassification.progression,
-#     # "Health Upgrade": ItemClassification.useful,
-#     # "Confetti Cannon": ItemClassification.filler,
-#     # "Math Trap": ItemClassification.trap,
-# }
 
-
-# Each Item instance must correctly report the "game" it belongs to.
-# To make this simple, it is common practice to subclass the basic Item class and override the "game" field.
 class SmolAmeItem(Item):
     game = "Smol Ame"
 
-
-# Ontop of our regular itempool, our world must be able to create arbitrary amounts of filler as requested by core.
-# To do this, it must define a function called world.get_filler_item_name(), which we will define in world.py later.
-# For now, let's make a function that returns the name of a random filler item here in items.py.
-# def get_random_filler_item_name(world: SmolAmeWorld) -> str:
-#     # APQuest has an option called "trap_chance".
-#     # This is the percentage chance that each filler item is a Math Trap instead of a Confetti Cannon.
-#     # For this purpose, we need to use a random generator.
-
-#     # IMPORTANT: Whenever you need to use a random generator, you must use world.random.
-#     # This ensures that generating with the same generator seed twice yields the same output.
-#     # DO NOT use a bare random object from Python's built-in random module.
-#     if world.random.randint(0, 99) < world.options.trap_chance:
-#         return "Math Trap"
-#     return "Confetti Cannon"
-
-
 def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
-#     # Our world class must have a create_item() function that can create any of our items by name at any time.
-#     # So, we make this helper function that creates the item by name with the correct classification.
-#     # Note: This function's content could just be the contents of world.create_item in world.py directly,
-#     # but it seemed nicer to have it in its own function over here in items.py.
     match world.options.game_mode:
         case smolame_options.GameMode.option_any:
             classification = items[name]["classification"]["any"]
