@@ -4,7 +4,7 @@ This project integrates Smol Ame with Archipelago, a multi-game randomizer frame
 
 ## Installation
 
-This is still a Work in Progress, once complete it will be available on the Releases page
+This is still a Work in Progress, once complete it will be available on the [Releases](https://github.com/Sh1r0Yaksha/SmolAmeAPWorld/releases) page
 
 ## Contributions
 
