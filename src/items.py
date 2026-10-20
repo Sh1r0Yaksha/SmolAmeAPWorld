@@ -16,7 +16,7 @@ with area_items_path.open("r", encoding="utf-8") as file:
     items = json.load(file)
 
 ITEM_NAME_TO_ID = {}
-item_id = 0
+item_id = 1
 for region_name, item_data in items.items():
     for item_name, item_location in item_data.items():
         ITEM_NAME_TO_ID[f"{region_name}-{item_name}"] = item_id

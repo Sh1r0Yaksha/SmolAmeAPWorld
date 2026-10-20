@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 LOCATION_NAME_TO_ID = {}
 
-location_id = 0
+location_id = 1
 
 for region_name, item_data in area_items.items():
     for item_name, location_name in item_data.items():
