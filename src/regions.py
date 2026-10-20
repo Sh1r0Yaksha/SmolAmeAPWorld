@@ -32,11 +32,13 @@ def create_all_regions(world: SmolAmeWorld) -> None:
 
 def connect_regions(world: SmolAmeWorld) -> None:
     hub_region = world.get_region("Hub")
+    region_names = [region_name for region_name in area_items]
 
-    entry_requirements = {
-        "Ame's Office": "Hub-AO Entry Button",
-        "Pekoland": "Hub-Pekoland Entry Button",
-    }
+    entry_requirements = { }
+
+    for region_name in region_names:
+        if region_name != "Hub":
+            entry_requirements[region_name] = f"Hub-{region_name} Entry Button"
 
     for region_name, entry_item in entry_requirements.items():
         region = world.get_region(region_name)
