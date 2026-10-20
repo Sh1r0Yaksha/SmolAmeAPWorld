@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import ItemClassification, Location
 
+from .items import SmolAmeItem
+
 area_items_path = Path(__file__).parent / "area_items.json"
 with area_items_path.open("r", encoding="utf-8") as file:
     area_items = json.load(file)
@@ -13,7 +15,7 @@ with area_items_path.open("r", encoding="utf-8") as file:
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
-    from .items import SmolAmeItem
+
 
 LOCATION_NAME_TO_ID = {}
 
@@ -47,7 +49,7 @@ def create_regular_locations(world: SmolAmeWorld) -> None:
 
 
 def create_all_events(world: SmolAmeWorld):
-    for region_name in area_items.items():
+    for region_name in area_items:
         region = world.get_region(region_name)
 
         region.add_event(f"{region_name} MOM",

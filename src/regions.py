@@ -23,7 +23,7 @@ def create_all_regions(world: SmolAmeWorld) -> None:
 
     multiworld_regions = []
 
-    for region_name, item_data in area_items.items():
+    for region_name in area_items:
         region = Region(region_name, world.player, world.multiworld)
         multiworld_regions.append(region)
 
@@ -32,7 +32,7 @@ def create_all_regions(world: SmolAmeWorld) -> None:
 
 def connect_regions(world: SmolAmeWorld) -> None:
     hub_region = world.get_region("Hub")
-    for region_name, item_data in area_items.items():
+    for region_name in area_items:
         if region_name != "Hub":
             region = world.get_region(region_name)
             region.connect(hub_region, f" {region} to {hub_region}")

@@ -20,16 +20,19 @@ with area_items_path.open("r", encoding="utf-8") as file:
 
 def set_all_rules(world: SmolAmeWorld) -> None:
 
-    # set_item_placement_rules(world)
+    set_item_placement_rules(world)
     set_completion_condition(world)
 
-# def set_item_placement_rules(world: SmolAmeWorld) -> None:
-#     for region in world.multiworld.get_regions(world.player):
-#         if region.name != "Hub":
-#             for location in region.locations:
-#                 location.item_rule = (
-#                     lambda item: item.name != "Level Entry Button"
-#                 )
+def set_item_placement_rules(world: SmolAmeWorld) -> None:
+    # Entry button not placed in the level itself
+    for region in world.multiworld.get_regions(world.player):
+        for location in region.locations:
+            location.item_rule = lambda item, region_name=region.name: (
+                not (
+                    "entry button" in item.name.lower()
+                    and region_name.lower() in item.name.lower()
+                )
+            )
 
 
 def set_completion_condition(world: SmolAmeWorld) -> None:
