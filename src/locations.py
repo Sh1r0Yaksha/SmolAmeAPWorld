@@ -23,7 +23,7 @@ location_id = 0
 
 for region_name, item_data in area_items.items():
     for item_name, location_name in item_data.items():
-        LOCATION_NAME_TO_ID[location_name] = location_id
+        LOCATION_NAME_TO_ID[f"{region_name}-{location_name}"] = location_id
         location_id += 1
 
 class SmolAmeLocation(Location):
@@ -44,15 +44,16 @@ def create_regular_locations(world: SmolAmeWorld) -> None:
     for region_name, item_data in area_items.items():
         region = world.get_region(region_name)
         for location_name in item_data.values():
-            location_name_id = get_location_name_with_id(location_name)
+            location_name_id = get_location_name_with_id(f"{region_name}-{location_name}")
             region.add_locations(location_name_id, SmolAmeLocation)   
 
 
 def create_all_events(world: SmolAmeWorld):
     for region_name in area_items:
-        region = world.get_region(region_name)
+        if region_name != "Hub":
+            region = world.get_region(region_name)
 
-        region.add_event(f"{region_name} MOM",
-                         f"{region_name} Cleared",
-                         location_type=SmolAmeLocation,
-                         item_type=SmolAmeItem)
+            region.add_event(f"{region_name} MOM Cleared",
+                            f"{region_name} Cleared",
+                            location_type=SmolAmeLocation,
+                            item_type=SmolAmeItem)

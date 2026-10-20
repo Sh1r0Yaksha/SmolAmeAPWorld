@@ -32,8 +32,21 @@ def create_all_regions(world: SmolAmeWorld) -> None:
 
 def connect_regions(world: SmolAmeWorld) -> None:
     hub_region = world.get_region("Hub")
-    for region_name in area_items:
-        if region_name != "Hub":
-            region = world.get_region(region_name)
-            region.connect(hub_region, f" {region} to {hub_region}")
-            hub_region.connect(region, f" {hub_region} to {region}")
+
+    entry_requirements = {
+        "Ame's Office": "Hub-AO Entry Button",
+        "Pekoland": "Hub-Pekoland Entry Button",
+    }
+
+    for region_name, entry_item in entry_requirements.items():
+        region = world.get_region(region_name)
+
+        # Entering a level requires its corresponding entry button.
+        entrance = hub_region.connect(region, f"Hub to {region_name}")
+        entrance.access_rule = (
+            lambda state, item=entry_item:
+                state.has(item, world.player)
+        )
+
+        # Allow returning to the Hub freely.
+        region.connect(hub_region, f"{region_name} to Hub")

@@ -58,31 +58,3 @@ class SmolAmeWorld(World):
         return self.options.as_dict(
             "game_mode"
         )
-
-    def pre_fill(self):
-        super().pre_fill()
-        hub = self.multiworld.get_region("Hub", self.player)
-        entry_buttons = [
-            item for item in self.multiworld.itempool
-            if item.player == self.player
-            and "entry button" in item.name.lower()
-        ]
-
-        # Find all valid Hub locations.
-        hub_locations = [
-            location for location in hub.locations
-            if location.item is None
-        ]
-
-        if not entry_buttons or not hub_locations:
-            raise Exception("Cannot guarantee a Hub entry button: no items or locations available.")
-
-        # Randomly choose one button and one Hub location.
-        button = random.choice(entry_buttons)
-        location = random.choice(hub_locations)
-
-        # Lock the chosen button into the chosen location.
-        location.place_locked_item(button)
-
-        # Remove the button from the normal item pool.
-        self.multiworld.itempool.remove(button)
