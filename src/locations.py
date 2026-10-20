@@ -6,31 +6,23 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import ItemClassification, Location
 
-items_path = Path(__file__).parent / "items.json"
-with items_path.open("r", encoding="utf-8") as file:
-    items = json.load(file)
+area_items_path = Path(__file__).parent / "area_items.json"
+with area_items_path.open("r", encoding="utf-8") as file:
+    area_items = json.load(file)
 
-regions_path = Path(__file__).parent / "regions.json"
-with regions_path.open("r", encoding="utf-8") as file:
-    regions = json.load(file)
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
+    from .items import SmolAmeItem
 
 LOCATION_NAME_TO_ID = {}
 
 location_id = 0
 
-for item_name, data in items.items():
-    if "Area" in data:
-        for region_name, locations in data["Area"].items():
-            for location_name in locations:
-                LOCATION_NAME_TO_ID[f"{region_name}-{location_name}"] = location_id
-                location_id += 1
-    else:
-        for region_name in regions:
-            LOCATION_NAME_TO_ID[f"{region_name}-{item_name}"] = location_id
-            location_id += 1
+for region_name, item_data in area_items.items():
+    for item_name, location_name in item_data.items():
+        LOCATION_NAME_TO_ID[location_name] = location_id
+        location_id += 1
 
 class SmolAmeLocation(Location):
     game = "Smol Ame"
@@ -47,16 +39,18 @@ def create_all_locations(world: SmolAmeWorld) -> None:
 
 
 def create_regular_locations(world: SmolAmeWorld) -> None:
-    for item_name, data in items.items():
-        if "Area" in data:
-            for region_name, locations in data["Area"].items():
-                region = world.get_region(region_name)
-                for location_name in locations:
-                    location_name_id = get_location_name_with_id(f"{region_name}-{location_name}")
-                    region.add_locations(location_name_id, SmolAmeLocation)
-        else:
-            for region_name in regions:
-                location_name_id = get_location_name_with_id(f"{region_name}-{item_name}")
-                region = world.get_region(region_name)
-                region.add_locations(location_name_id, SmolAmeLocation)
-                
+    for region_name, item_data in area_items.items():
+        region = world.get_region(region_name)
+        for location_name in item_data.values():
+            location_name_id = get_location_name_with_id(location_name)
+            region.add_locations(location_name_id, SmolAmeLocation)   
+
+
+def create_all_events(world: SmolAmeWorld):
+    for region_name in area_items.items():
+        region = world.get_region(region_name)
+
+        region.add_event(f"{region_name} MOM",
+                         f"{region_name} Cleared",
+                         location_type=SmolAmeLocation,
+                         item_type=SmolAmeItem)

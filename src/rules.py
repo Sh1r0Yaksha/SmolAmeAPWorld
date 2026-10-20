@@ -12,74 +12,61 @@ from . import options as smolame_options  # rename due to a name conflict with W
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-items_path = Path(__file__).parent / "items.json"
-with items_path.open("r", encoding="utf-8") as file:
-    items = json.load(file)
+area_items_path = Path(__file__).parent / "area_items.json"
+with area_items_path.open("r", encoding="utf-8") as file:
+    area_items = json.load(file)
 
-regions_path = Path(__file__).parent / "regions.json"
-with regions_path.open("r", encoding="utf-8") as file:
-    regions = json.load(file)
 
 
 def set_all_rules(world: SmolAmeWorld) -> None:
 
-    set_item_placement_rules(world)
+    # set_item_placement_rules(world)
     set_completion_condition(world)
 
-def set_item_placement_rules(world: SmolAmeWorld) -> None:
-    for region in world.multiworld.get_regions(world.player):
-        if region.name != "hub":
-            for location in region.locations:
-                location.item_rule = (
-                    lambda item: item.name != "Level Entry Button"
-                )
+# def set_item_placement_rules(world: SmolAmeWorld) -> None:
+#     for region in world.multiworld.get_regions(world.player):
+#         if region.name != "Hub":
+#             for location in region.locations:
+#                 location.item_rule = (
+#                     lambda item: item.name != "Level Entry Button"
+#                 )
 
 
 def set_completion_condition(world: SmolAmeWorld) -> None:
-    mom_button_count = 0
-    bubba_count = 0
-    stache_quota_count = 0
 
-    for item_name, data in items.items():
-        if item_name == "MOM Button":
-            mom_button_count = sum(
-                len(locations)
-                for locations in data.get("Area", {}).values()
-            )
+    Level_Clears = [
+        f"{region_name} Cleared"
+        for region_name in area_items
+    ]
 
-        elif item_name == "Bubba":
-            bubba_count = sum(
-                len(locations)
-                for locations in data.get("Area", {}).values()
-            )
+    Bubba_Coins = [
+        item_name
+        for item_name in world.item_name_to_id
+        if "bubba coin" in item_name.lower()
+    ]
 
-        elif item_name == "Stache Quota":
-            # One Stache Quota check in each level
-            stache_quota_count = sum(
-                1 for region_name in regions
-                if region_name != "Hub"
-            )
+    Stache_Quotas = [
+        item_name
+        for item_name in world.item_name_to_id
+        if "stache quota" in item_name.lower()
+    ]
 
     match world.options.game_mode:
         case smolame_options.GameMode.option_any:
-            world.set_completion_rule(
-                Has("MOM Button", count=mom_button_count)
-            )
+            world.set_completion_rule(HasAll(*Level_Clears))
 
         case smolame_options.GameMode.option_all_stages:
-            world.set_completion_rule(
-                Has("MOM Button", count=mom_button_count)
-            )
+            world.set_completion_rule(HasAll(*Level_Clears))
 
         case smolame_options.GameMode.option_bubba:
             world.set_completion_rule(
-                Has("MOM Button", count=mom_button_count)
-                & Has("Bubba", count=bubba_count)
+                HasAll(*Level_Clears)
+                & HasAll(*Bubba_Coins)
             )
 
         case smolame_options.GameMode.option_cc:
             world.set_completion_rule(
-                Has("MOM Button", count=mom_button_count)
-                & Has("Bubba", count=bubba_count)
-                & Has("Stache Quota", count=stache_quota_count)
+                HasAll(*Level_Clears)
+                & HasAll(*Bubba_Coins)
+                & HasAll(*Stache_Quotas)
             )

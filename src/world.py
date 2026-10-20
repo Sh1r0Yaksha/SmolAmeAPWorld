@@ -1,10 +1,17 @@
 from collections.abc import Mapping
 from typing import Any
+import json
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 from worlds.AutoWorld import World
 
 from . import items, locations, regions, rules, web_world
 from . import options as smolame_options  # rename due to a name conflict with World.options
+
+if TYPE_CHECKING:
+    from BaseClasses import MultiWorld
+
 
 class SmolAmeWorld(World):
     
@@ -14,6 +21,10 @@ class SmolAmeWorld(World):
 
     game = "Smol Ame"
 
+    area_items_path = Path(__file__).parent / "area_items.json"
+    with area_items_path.open("r", encoding="utf-8") as file:
+        area_items: dict[str, dict] = json.load(file)
+
     web = web_world.SmolAmeWebWorld()
 
     options_dataclass = smolame_options.SmolAmeOptions
@@ -22,7 +33,7 @@ class SmolAmeWorld(World):
     location_name_to_id = locations.LOCATION_NAME_TO_ID
     item_name_to_id = items.ITEM_NAME_TO_ID
 
-    origin_region_name = "hub"
+    origin_region_name = "Hub"
 
     def create_regions(self) -> None:
         regions.create_and_connect_regions(self)

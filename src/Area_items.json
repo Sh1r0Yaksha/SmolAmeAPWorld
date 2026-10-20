@@ -1,20 +1,20 @@
 {
     "Hub": {
-        "AO Entry": "On the Table",
-        "Pekoland Entry": "On the Carrot"
+        "AO Entry Button": "On the Table",
+        "Pekoland Entry Button": "On the Carrot"
     },
     "Ame's Office": {
-        "MOM": "At the End of Level",
-        "Bubba 1": "Second Bookstack",
-        "Bubba 2": "Under Table",
-        "Bubba 3": "On the Planes/Corkboard",
-        "Stache Quota": "On Collecting XX Staches"
+        "MOM Button": "On the Last Table",
+        "Bubba Coin 1": "Second Bookstack",
+        "Bubba Coin 2": "Under Table",
+        "Bubba Coin 3": "On the Planes/Corkboard",
+        "Stache Quota": "On Collecting 213 Staches"
     },
     "Pekoland": {
-        "MOM": "At the End of Level",
-        "Bubba 1": "On the Top carrot after slide",
-        "Bubba 2": "Between Spikes before Checkpoint 2",
-        "Bubba 3": "Through the Spikes",
-        "Stache Quota": "On Collecting XX Staches"
+        "MOM Button": "On top of the Last Hill",
+        "Bubba Coin 1": "On the Top carrot after slide",
+        "Bubba Coin 2": "Between Spikes before Checkpoint 2",
+        "Bubba Coin 3": "Through the Spikes",
+        "Stache Quota": "On Collecting 175 Staches"
     }
 }

@@ -11,46 +11,46 @@ from . import options as smolame_options  # rename due to a name conflict with W
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-items_path = Path(__file__).parent / "items.json"
-with items_path.open("r", encoding="utf-8") as file:
+area_items_path = Path(__file__).parent / "Area_items.json"
+with area_items_path.open("r", encoding="utf-8") as file:
     items = json.load(file)
 
 ITEM_NAME_TO_ID = {}
-
-for item_name, data in items.items():
-    ITEM_NAME_TO_ID[item_name] = data["ID"]
+item_id = 0
+for region_name, item_data in items.items():
+    for item_name, item_location in item_data.items():
+        ITEM_NAME_TO_ID[f"{region_name} {item_name}"] = item_id
+        item_id += 1
 
 class SmolAmeItem(Item):
     game = "Smol Ame"
 
 def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
-    match world.options.game_mode:
-        case smolame_options.GameMode.option_any:
-            classification = items[name]["Classification"]["any"]
-        case smolame_options.GameMode.option_all_stages:
-            classification = items[name]["Classification"]["all_stages"]
-        case smolame_options.GameMode.option_bubba:
-            classification = items[name]["Classification"]["bubba"]
-        case smolame_options.GameMode.option_cc:
-            classification = items[name]["Classification"]["cc"]
+    classification_type = ItemClassification.filler
 
-    classification_type = {
-        "filler": ItemClassification.filler,
-        "progression": ItemClassification.progression,
-    }[classification]
+    if "bubba coin" in name.lower() and (
+        world.options.game_mode in (
+            smolame_options.GameMode.option_bubba,
+            smolame_options.GameMode.option_cc,
+        )
+    ):
+        classification_type = ItemClassification.progression
 
+    if (
+        "stache quota" in name.lower()
+        and world.options.game_mode == smolame_options.GameMode.option_cc
+    ):
+        classification_type = ItemClassification.progression
 
-    return SmolAmeItem(name, classification_type, items[name]["ID"], world.player)
+    return SmolAmeItem(name, classification_type, ITEM_NAME_TO_ID[name], world.player)
 
 
 def create_all_items(world: SmolAmeWorld) -> None:
     itempool: list[Item] = []
-    
-    for name, data in items.items():
-        for region, quantity in data["quantity"].items():
-            for _ in range(quantity):
-                itempool.append(world.create_item(name))
 
+    for name, id in ITEM_NAME_TO_ID.items():
+        itempool.append(world.create_item(name))
+    
     number_of_items = len(itempool)
 
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
