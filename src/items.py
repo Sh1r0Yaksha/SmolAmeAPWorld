@@ -11,7 +11,7 @@ from . import options as smolame_options  # rename due to a name conflict with W
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-area_items_path = Path(__file__).parent / "Area_items.json"
+area_items_path = Path(__file__).parent / "area_items.json"
 with area_items_path.open("r", encoding="utf-8") as file:
     items = json.load(file)
 
@@ -27,6 +27,9 @@ class SmolAmeItem(Item):
 
 def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
     classification_type = ItemClassification.filler
+
+    if "entry button" in name.lower():
+        classification_type = ItemClassification.progression
 
     if "bubba coin" in name.lower() and (
         world.options.game_mode in (
