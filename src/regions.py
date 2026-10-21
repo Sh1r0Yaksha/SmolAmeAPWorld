@@ -34,21 +34,8 @@ def connect_regions(world: SmolAmeWorld) -> None:
     hub_region = world.get_region("Hub")
     region_names = [region_name for region_name in area_items]
 
-    entry_requirements = { }
-
     for region_name in region_names:
         if region_name != "Hub":
-            entry_requirements[region_name] = f"Hub-{region_name} Entry Button"
-
-    for region_name, entry_item in entry_requirements.items():
-        region = world.get_region(region_name)
-
-        # Entering a level requires its corresponding entry button.
-        entrance = hub_region.connect(region, f"Hub to {region_name}")
-        entrance.access_rule = (
-            lambda state, item=entry_item:
-                state.has(item, world.player)
-        )
-
-        # Allow returning to the Hub freely.
-        region.connect(hub_region, f"{region_name} to Hub")
+            region = world.get_region(region_name)
+            region.connect(hub_region, f"{region_name} to Hub")
+            hub_region.connect(region, f"Hub to {region_name}")
