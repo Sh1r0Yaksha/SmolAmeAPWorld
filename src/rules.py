@@ -26,7 +26,7 @@ def set_all_rules(world: SmolAmeWorld) -> None:
 def set_completion_condition(world: SmolAmeWorld) -> None:
 
     Level_Clears = [
-        f"{region_name} Cleared"
+        f"{region_name}-Cleared"
         for region_name in area_items
         if region_name != "Hub"
     ]
