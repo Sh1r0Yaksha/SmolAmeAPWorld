@@ -53,7 +53,7 @@ def create_all_events(world: SmolAmeWorld):
         if region_name != "Hub":
             region = world.get_region(region_name)
 
-            region.add_event(f"{region_name}-Cleared",
+            region.add_event(f"{region_name} MOM Cleared",
                             f"{region_name}-Cleared",
                             location_type=SmolAmeLocation,
                             item_type=SmolAmeItem)
