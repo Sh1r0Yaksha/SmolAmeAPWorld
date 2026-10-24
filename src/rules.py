@@ -44,9 +44,6 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
     ]
 
     match world.options.game_mode:
-        case smolame_options.GameMode.option_any:
-            world.set_completion_rule(HasAll(*Level_Clears))
-
         case smolame_options.GameMode.option_all_stages:
             world.set_completion_rule(HasAll(*Level_Clears))
 

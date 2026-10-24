@@ -9,13 +9,12 @@ class GameMode(Choice):
 
     display_name = "Game Mode"
 
-    option_any = 0
-    option_all_stages = 1
-    option_bubba = 2
-    option_cc = 3
+    option_all_stages = 0
+    option_bubba = 1
+    option_cc = 2
 
     # Choice options must define an explicit default value.
-    default = option_any
+    default = option_all_stages
 
 @dataclass
 class SmolAmeOptions(PerGameCommonOptions):
