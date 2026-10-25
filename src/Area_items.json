@@ -94,11 +94,6 @@
         "Stache Quota": "Stache Quota"
     },
     "Character Select": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
     },
     "Sweet Dreams": {
         "MOM Button 1": "MOM Button 1",
@@ -123,6 +118,7 @@
     },
     "BauDol": {
         "MOM Button 1": "MOM Button 1",
+        "MOM Button 2": "MOM Button 2",
         "Bubba Coin 1": "Bubba Coin 1",
         "Bubba Coin 2": "Bubba Coin 2",
         "Bubba Coin 3": "Bubba Coin 3",
@@ -165,6 +161,7 @@
     },
     "Farewell": {
         "MOM Button 1": "MOM Button 1",
+        "MOM Button 2": "MOM Button 2",
         "Bubba Coin 1": "Bubba Coin 1",
         "Bubba Coin 2": "Bubba Coin 2",
         "Bubba Coin 3": "Bubba Coin 3",
