@@ -16,6 +16,15 @@ class GameMode(Choice):
     # Choice options must define an explicit default value.
     default = option_all_stages
 
+class IncludeCA(Toggle):
+    """
+    Include Continued Adventure Levels
+    """
+
+    display_name = "Include Continued Adventures"
+
+
 @dataclass
 class SmolAmeOptions(PerGameCommonOptions):
     game_mode: GameMode
+    include_ca: IncludeCA
