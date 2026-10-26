@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 from BaseClasses import Item, ItemClassification
 
 from . import options as smolame_options  # rename due to a name conflict with World.options
+from .regions import get_included_regions
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
@@ -15,6 +16,7 @@ area_items_path = Path(__file__).parent / "area_items.json"
 with area_items_path.open("r", encoding="utf-8") as file:
     items = json.load(file)
 
+# Built from the full json on purpose, so IDs stay the same whether or not include_ca is on.
 ITEM_NAME_TO_ID = {}
 item_id = 1
 for region_name, item_data in items.items():
@@ -51,8 +53,9 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
 def create_all_items(world: SmolAmeWorld) -> None:
     itempool: list[Item] = []
 
-    for name, id in ITEM_NAME_TO_ID.items():
-        itempool.append(world.create_item(name))
+    for region_name in get_included_regions(world):
+        for item_name in items[region_name]:
+            itempool.append(world.create_item(f"{region_name}-{item_name}"))
     
     number_of_items = len(itempool)
 

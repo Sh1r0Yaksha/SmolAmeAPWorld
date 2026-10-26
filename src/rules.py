@@ -8,6 +8,7 @@ from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
 from . import options as smolame_options  # rename due to a name conflict with World.options
+from .regions import get_included_regions
 
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
@@ -25,22 +26,31 @@ def set_all_rules(world: SmolAmeWorld) -> None:
 
 def set_completion_condition(world: SmolAmeWorld) -> None:
 
-    Level_Clears = [
-        f"{region_name}-Cleared"
-        for region_name in area_items
+    # Regions left out by include_ca don't exist in this world, so they can't be required.
+    included_regions = [
+        region_name
+        for region_name in get_included_regions(world)
         if region_name != "Hub"
     ]
 
+    Level_Clears = [
+        f"{region_name}-Cleared"
+        for region_name in included_regions
+    ]
+
+    # Item names are "<region>-<item>", so the region is everything before the last "-"
     Bubba_Coins = [
         item_name
         for item_name in world.item_name_to_id
         if "bubba coin" in item_name.lower()
+        and item_name.rpartition("-")[0] in included_regions
     ]
 
     Stache_Quotas = [
         item_name
         for item_name in world.item_name_to_id
         if "stache quota" in item_name.lower()
+        and item_name.rpartition("-")[0] in included_regions
     ]
 
     match world.options.game_mode:
