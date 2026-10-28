@@ -58,6 +58,6 @@ def create_all_events(world: SmolAmeWorld):
                             item_type=SmolAmeItem)
 
             region.add_event(f"{region_name} Stache Quota Completed",
-                f"{region_name}-Stache Quota",
+                f"{region_name}-Stache Quota Completed",
                 location_type=SmolAmeLocation,
                 item_type=SmolAmeItem)

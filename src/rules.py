@@ -13,16 +13,8 @@ from .regions import get_included_regions
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-area_items_path = Path(__file__).parent / "area_items.json"
-with area_items_path.open("r", encoding="utf-8") as file:
-    area_items = json.load(file)
-
-
-
 def set_all_rules(world: SmolAmeWorld) -> None:
     set_completion_condition(world)
-
-
 
 def set_completion_condition(world: SmolAmeWorld) -> None:
 

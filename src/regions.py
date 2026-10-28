@@ -17,7 +17,7 @@ with ids_path.open("r", encoding="utf-8") as file:
 def get_included_regions(world: SmolAmeWorld) -> list[str]:
     """
     Regions that take part in generation (Hub included).
-    Everything listed after "NOTHING" in area_items.json is Continued Adventures
+    Everything listed after "NOTHING" in IDs.json is Continued Adventures
     content, and is left out unless include_ca is enabled.
     """
     region_names = list(ids)

@@ -32,14 +32,16 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
     if "MOM Button" in name:
         classification_type = ItemClassification.progression
 
-    if "Bubba Coin" in name and (
-        world.options.game_mode in (
-            smolame_options.GameMode.option_bubba,
-            smolame_options.GameMode.option_cc,
-        )
-    ):
-        classification_type = ItemClassification.progression
+    if "Bubba Coin" in name:
+        if (world.options.game_mode in (
+                    smolame_options.GameMode.option_bubba,
+                    smolame_options.GameMode.option_cc,
+                )):
+            classification_type = ItemClassification.progression
+        else:
+            classification_type = ItemClassification.useful
 
+    
     return SmolAmeItem(name, classification_type, ITEM_NAME_TO_ID[name], world.player)
 
 def create_all_items(world: SmolAmeWorld) -> None:
