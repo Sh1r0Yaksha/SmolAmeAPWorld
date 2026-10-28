@@ -9,9 +9,9 @@ from BaseClasses import Entrance, Region
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-area_items_path = Path(__file__).parent / "area_items.json"
-with area_items_path.open("r", encoding="utf-8") as file:
-    area_items = json.load(file)
+ids_path = Path(__file__).parent / "IDs.json"
+with ids_path.open("r", encoding="utf-8") as file:
+    ids = json.load(file)
 
 
 def get_included_regions(world: SmolAmeWorld) -> list[str]:
@@ -20,7 +20,7 @@ def get_included_regions(world: SmolAmeWorld) -> list[str]:
     Everything listed after "NOTHING" in area_items.json is Continued Adventures
     content, and is left out unless include_ca is enabled.
     """
-    region_names = list(area_items)
+    region_names = list(ids)
 
     if not world.options.include_ca.value:
         last_base_game_index = region_names.index("NOTHING")

@@ -9,9 +9,9 @@ from BaseClasses import ItemClassification, Location
 from .items import SmolAmeItem
 from .regions import get_included_regions
 
-area_items_path = Path(__file__).parent / "area_items.json"
-with area_items_path.open("r", encoding="utf-8") as file:
-    area_items = json.load(file)
+ids_path = Path(__file__).parent / "IDs.json"
+with ids_path.open("r", encoding="utf-8") as file:
+    ids = json.load(file)
 
 
 if TYPE_CHECKING:
@@ -21,12 +21,9 @@ if TYPE_CHECKING:
 # Built from the full json on purpose, so IDs stay the same whether or not include_ca is on.
 LOCATION_NAME_TO_ID = {}
 
-location_id = 1
-
-for region_name, item_data in area_items.items():
-    for item_name, location_name in item_data.items():
-        LOCATION_NAME_TO_ID[f"{region_name}-{location_name}"] = location_id
-        location_id += 1
+for region_name, region_data in ids.items():
+    for check_name, check_id in region_data['checks'].items():
+        LOCATION_NAME_TO_ID[f"{region_name}-{check_name}"] = check_id
 
 class SmolAmeLocation(Location):
     game = "Smol Ame"
@@ -45,7 +42,7 @@ def create_all_locations(world: SmolAmeWorld) -> None:
 def create_regular_locations(world: SmolAmeWorld) -> None:
     for region_name in get_included_regions(world):
         region = world.get_region(region_name)
-        for location_name in area_items[region_name].values():
+        for location_name in ids[region_name]['checks']:
             location_name_id = get_location_name_with_id(f"{region_name}-{location_name}")
             region.add_locations(location_name_id, SmolAmeLocation)   
 
@@ -59,3 +56,8 @@ def create_all_events(world: SmolAmeWorld):
                             f"{region_name}-Cleared",
                             location_type=SmolAmeLocation,
                             item_type=SmolAmeItem)
+
+            region.add_event(f"{region_name} Stache Quota Completed",
+                f"{region_name}-Stache Quota",
+                location_type=SmolAmeLocation,
+                item_type=SmolAmeItem)

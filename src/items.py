@@ -12,17 +12,16 @@ from .regions import get_included_regions
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-area_items_path = Path(__file__).parent / "area_items.json"
-with area_items_path.open("r", encoding="utf-8") as file:
-    items = json.load(file)
+ids_path = Path(__file__).parent / "IDs.json"
+with ids_path.open("r", encoding="utf-8") as file:
+    ids = json.load(file)
 
 # Built from the full json on purpose, so IDs stay the same whether or not include_ca is on.
 ITEM_NAME_TO_ID = {}
-item_id = 1
-for region_name, item_data in items.items():
-    for item_name, item_location in item_data.items():
+
+for region_name, region_data in ids.items():
+    for item_name, item_id in region_data['items'].items():
         ITEM_NAME_TO_ID[f"{region_name}-{item_name}"] = item_id
-        item_id += 1
 
 class SmolAmeItem(Item):
     game = "Smol Ame"
@@ -30,10 +29,10 @@ class SmolAmeItem(Item):
 def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> SmolAmeItem:
     classification_type = ItemClassification.filler
 
-    if "entry button" in name.lower():
+    if "MOM Button" in name:
         classification_type = ItemClassification.progression
 
-    if "bubba coin" in name.lower() and (
+    if "Bubba Coin" in name and (
         world.options.game_mode in (
             smolame_options.GameMode.option_bubba,
             smolame_options.GameMode.option_cc,
@@ -41,20 +40,13 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
     ):
         classification_type = ItemClassification.progression
 
-    if (
-        "stache quota" in name.lower()
-        and world.options.game_mode == smolame_options.GameMode.option_cc
-    ):
-        classification_type = ItemClassification.progression
-
     return SmolAmeItem(name, classification_type, ITEM_NAME_TO_ID[name], world.player)
-
 
 def create_all_items(world: SmolAmeWorld) -> None:
     itempool: list[Item] = []
 
     for region_name in get_included_regions(world):
-        for item_name in items[region_name]:
+        for item_name in ids[region_name]['items']:
             itempool.append(world.create_item(f"{region_name}-{item_name}"))
     
     number_of_items = len(itempool)

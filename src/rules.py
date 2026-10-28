@@ -42,15 +42,13 @@ def set_completion_condition(world: SmolAmeWorld) -> None:
     Bubba_Coins = [
         item_name
         for item_name in world.item_name_to_id
-        if "bubba coin" in item_name.lower()
+        if "Bubba Coin" in item_name
         and item_name.rpartition("-")[0] in included_regions
     ]
 
     Stache_Quotas = [
-        item_name
-        for item_name in world.item_name_to_id
-        if "stache quota" in item_name.lower()
-        and item_name.rpartition("-")[0] in included_regions
+        f"{region_name}-Stache Quota"
+        for region_name in included_regions
     ]
 
     match world.options.game_mode:

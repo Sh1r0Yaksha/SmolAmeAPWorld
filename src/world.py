@@ -22,10 +22,6 @@ class SmolAmeWorld(World):
 
     game = "Smol Ame"
 
-    area_items_path = Path(__file__).parent / "area_items.json"
-    with area_items_path.open("r", encoding="utf-8") as file:
-        area_items: dict[str, dict] = json.load(file)
-
     web = web_world.SmolAmeWebWorld()
 
     options_dataclass = smolame_options.SmolAmeOptions
