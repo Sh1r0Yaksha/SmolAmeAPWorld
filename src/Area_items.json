@@ -1,176 +1,367 @@
 {
+    "General":{
+        "items": {
+            "Moustache": 1,
+            "10 Moustache": 2
+        },
+        "checks": {
+        }
+    },
     "Hub": {    
+        "items": {
+        },
+        "checks":{
+        }
     },
     "Ame's Office": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 2,
+            "Bubba Coin 1 Unlock": 3,
+            "Bubba Coin 2 Unlock": 4,
+            "Bubba Coin 3 Unlock": 5
+        },
+        "checks":{
+            "MOM Button Pressed": 1,
+            "Bubba Coin 1 Collected": 2,
+            "Bubba Coin 2 Collected": 3,
+            "Bubba Coin 3 Collected": 4,
+            "Stache Quota Collected": 5
+        }
     },
     "Pekoland": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Ame's Office REVENGEANCE": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "What A Joke": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Inascapable Madness": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "To The Moon": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Inumore": {
-        "MOM Button 1": "MOM Button 1",
-        "MOM Button 2": "MOM Button 2",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button 1 Unlock": 5,
+            "MOM Button 2 Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button 1 Pressed": 6,
+            "MOM Button 2 Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Mogu Mogu": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Pop On Rocks": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Here Comes Hope": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Reflect": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Red Heart": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "NOTHING": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Character Select": {
     },
     "Sweet Dreams": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Play Dice": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Graveyard Groove": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "BauDol": {
-        "MOM Button 1": "MOM Button 1",
-        "MOM Button 2": "MOM Button 2",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button 1 Unlock": 5,
+            "MOM Button 2 Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button 1 Pressed": 5,
+            "MOM Button 2 Pressed": 5,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Daydream": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Say! Fanfare!": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "ALiCE&u": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Mage of Violet": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "HOLOGRAM CIRCUS": {
-        "MOM Button 1": "MOM Button 1",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     },
     "Farewell": {
-        "MOM Button 1": "MOM Button 1",
-        "MOM Button 2": "MOM Button 2",
-        "Bubba Coin 1": "Bubba Coin 1",
-        "Bubba Coin 2": "Bubba Coin 2",
-        "Bubba Coin 3": "Bubba Coin 3",
-        "Stache Quota": "Stache Quota"
+        "items":{
+            "MOM Button Unlock": 5,
+            "Bubba Coin 1 Unlock": 6,
+            "Bubba Coin 2 Unlock": 7,
+            "Bubba Coin 3 Unlock": 8
+        },
+        "checks":{
+            "MOM Button Pressed": 6,
+            "Bubba Coin 1 Collected": 7,
+            "Bubba Coin 2 Collected": 8,
+            "Bubba Coin 3 Collected": 9,
+            "Stache Quota Collected": 10
+        }
     }
-    
-    
-    
-
-    
-
 }
