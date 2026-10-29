@@ -16,6 +16,9 @@ Download the `SmolAmeArchipelagoMod.zip` file from [Releases](https://github.com
 
 Run the game, and the client should start.
 
+## Running on Linux
+Follow the same steps as the Windows version, and run the game through your preferred method (Wine/Steam). It should work flawlessly
+
 ## How to play
 
 First, you need a room to connect to. For this, you or someone you know has to generate a game.  
