@@ -1,6 +1,7 @@
 from __future__ import annotations
 import json
 from pathlib import Path
+import random
 
 from typing import TYPE_CHECKING
 
@@ -20,7 +21,7 @@ with ids_path.open("r", encoding="utf-8") as file:
 ITEM_NAME_TO_ID = {}
 
 for region_name, region_data in ids.items():
-    for item_name, item_id in region_data['items'].items():
+    for item_name, item_id in region_data.get("items", {}).items():
         ITEM_NAME_TO_ID[f"{region_name}-{item_name}"] = item_id
 
 class SmolAmeItem(Item):
@@ -44,6 +45,13 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
     
     return SmolAmeItem(name, classification_type, ITEM_NAME_TO_ID[name], world.player)
 
+def get_random_filler_item_name(world: SmolAmeWorld) -> str:
+    return random.choices(
+        ["General-Moustache", "General-10 Moustache"],
+        weights=[90, 10],
+        k=1
+    )[0]
+
 def create_all_items(world: SmolAmeWorld) -> None:
     itempool: list[Item] = []
 
@@ -60,3 +68,4 @@ def create_all_items(world: SmolAmeWorld) -> None:
     itempool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
 
     world.multiworld.itempool += itempool
+

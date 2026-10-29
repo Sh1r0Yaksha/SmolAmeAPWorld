@@ -22,7 +22,7 @@ if TYPE_CHECKING:
 LOCATION_NAME_TO_ID = {}
 
 for region_name, region_data in ids.items():
-    for check_name, check_id in region_data['checks'].items():
+    for check_name, check_id in region_data.get("checks", {}).items():
         LOCATION_NAME_TO_ID[f"{region_name}-{check_name}"] = check_id
 
 class SmolAmeLocation(Location):
