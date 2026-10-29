@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from BaseClasses import ItemClassification, Location
 
 from .items import SmolAmeItem
-from .regions import get_included_regions
+from .regions import get_included_regions, get_level_regions
 
 ids_path = Path(__file__).parent / "IDs.json"
 with ids_path.open("r", encoding="utf-8") as file:
@@ -42,22 +42,21 @@ def create_all_locations(world: SmolAmeWorld) -> None:
 def create_regular_locations(world: SmolAmeWorld) -> None:
     for region_name in get_included_regions(world):
         region = world.get_region(region_name)
-        for location_name in ids[region_name]['checks']:
+        for location_name in ids[region_name].get("checks", {}):
             location_name_id = get_location_name_with_id(f"{region_name}-{location_name}")
             region.add_locations(location_name_id, SmolAmeLocation)   
 
 
 def create_all_events(world: SmolAmeWorld):
-    for region_name in get_included_regions(world):
-        if region_name != "Hub":
-            region = world.get_region(region_name)
+    for region_name in get_level_regions(world):
+        region = world.get_region(region_name)
 
-            region.add_event(f"{region_name} MOM Cleared",
-                            f"{region_name}-Cleared",
-                            location_type=SmolAmeLocation,
-                            item_type=SmolAmeItem)
+        region.add_event(f"{region_name} MOM Cleared",
+                         f"{region_name}-Cleared",
+                         location_type=SmolAmeLocation,
+                         item_type=SmolAmeItem)
 
-            region.add_event(f"{region_name} Stache Quota Completed",
-                f"{region_name}-Stache Quota Completed",
-                location_type=SmolAmeLocation,
-                item_type=SmolAmeItem)
+        region.add_event(f"{region_name} Stache Quota Completed",
+                         f"{region_name}-Stache Quota Completed",
+                         location_type=SmolAmeLocation,
+                         item_type=SmolAmeItem)

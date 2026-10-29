@@ -7,7 +7,7 @@ class SmolAmeWebWorld(WebWorld):
     game = "Smol Ame"
 
     # You can choose between dirt, grass, grassFlowers, ice, jungle, ocean, partyTime, and stone.
-    theme = "grassFlowers"
+    theme = "partyTime"
 
     setup_en = Tutorial(
         "Multiworld Setup Guide",

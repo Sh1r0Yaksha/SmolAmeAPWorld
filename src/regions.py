@@ -13,6 +13,19 @@ ids_path = Path(__file__).parent / "IDs.json"
 with ids_path.open("r", encoding="utf-8") as file:
     ids = json.load(file)
 
+# Regions that exist in the world but are not playable levels:
+# no checks, no items, no "Cleared" / "Stache Quota Completed" events.
+NON_LEVEL_REGIONS = {"Hub", "Character Select"}
+
+
+def get_level_regions(world: SmolAmeWorld) -> list[str]:
+    """Included regions that are actual levels (no Hub, no Character Select)."""
+    return [
+        region_name
+        for region_name in get_included_regions(world)
+        if region_name not in NON_LEVEL_REGIONS
+    ]
+
 
 def get_included_regions(world: SmolAmeWorld) -> list[str]:
     """

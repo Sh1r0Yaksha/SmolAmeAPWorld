@@ -46,7 +46,7 @@ def create_item_with_correct_classification(world: SmolAmeWorld, name: str) -> S
     return SmolAmeItem(name, classification_type, ITEM_NAME_TO_ID[name], world.player)
 
 def get_random_filler_item_name(world: SmolAmeWorld) -> str:
-    return random.choices(
+    return world.random.choices(
         ["General-Moustache", "General-10 Moustache"],
         weights=[90, 10],
         k=1
@@ -56,7 +56,7 @@ def create_all_items(world: SmolAmeWorld) -> None:
     itempool: list[Item] = []
 
     for region_name in get_included_regions(world):
-        for item_name in ids[region_name]['items']:
+        for item_name in ids[region_name].get("items", {}):
             itempool.append(world.create_item(f"{region_name}-{item_name}"))
     
     number_of_items = len(itempool)
