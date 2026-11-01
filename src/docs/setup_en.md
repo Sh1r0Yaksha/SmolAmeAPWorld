@@ -3,8 +3,8 @@
 ## Required Software
 
 - [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases/latest)
-- [The Smol Ame apworld](https://github.com/NewSoupVi/Archipelago/releases),
-- [Smol Ame Archipelago Client Mod]()
+- [The Smol Ame apworld](https://github.com/Sh1r0Yaksha/SmolAmeAPWorld/releases),
+- [Smol Ame Archipelago Client Mod](https://github.com/Sh1r0Yaksha/SmolAmeArchipelagoMod/releases)
 
 ## Configuration Template
 
