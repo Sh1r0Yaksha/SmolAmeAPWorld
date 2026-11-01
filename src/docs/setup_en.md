@@ -6,6 +6,10 @@
 - [The Smol Ame apworld](https://github.com/NewSoupVi/Archipelago/releases),
 - [Smol Ame Archipelago Client Mod]()
 
+## Configuration Template
+
+The template for setting options can be found here: [Template](/template.yaml)
+
 ## Client Mod Installation
 
 For vanilla [Smol Ame](https://moocow-games.itch.io/smol-ame), download the *BepInEx_win_x86* version of BepinEx from its [Releases](https://github.com/BepInEx/BepInEx/releases) page. For [Continued Adventures](https://witcherchan.itch.io/smol-ame-continued-adventure), download the *BepInEx_win_x64 version*.

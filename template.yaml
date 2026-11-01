@@ -1,0 +1,17 @@
+name: username
+description: YAML file for Smol Ame
+game: Smol Ame
+Smol Ame:
+  progression_balancing: normal
+  accessibility: full
+  # Game modes: all_stages, bubba, cc
+  game_mode: bubba
+  # include_ca: true/false 
+  include_ca: false
+  local_items: []
+  non_local_items: []
+  start_inventory: {}
+  start_hints: []
+  start_location_hints: []
+  exclude_locations: []
+  priority_locations: []
