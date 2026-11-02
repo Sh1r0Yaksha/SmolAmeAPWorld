@@ -1,7 +1,6 @@
 from __future__ import annotations
 import json
-from pathlib import Path
-import random
+from importlib.resources import files
 
 from typing import TYPE_CHECKING
 
@@ -13,9 +12,9 @@ from .regions import get_included_regions
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-ids_path = Path(__file__).parent / "IDs.json"
-with ids_path.open("r", encoding="utf-8") as file:
-    ids = json.load(file)
+ids = json.loads(
+    files(__package__).joinpath("IDs.json").read_text(encoding="utf-8")
+)
 
 # Built from the full json on purpose, so IDs stay the same whether or not include_ca is on.
 ITEM_NAME_TO_ID = {}

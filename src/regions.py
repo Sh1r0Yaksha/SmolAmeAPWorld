@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json
-from pathlib import Path
+from importlib.resources import files
 
 from typing import TYPE_CHECKING
 
@@ -9,9 +9,9 @@ from BaseClasses import Entrance, Region
 if TYPE_CHECKING:
     from .world import SmolAmeWorld
 
-ids_path = Path(__file__).parent / "IDs.json"
-with ids_path.open("r", encoding="utf-8") as file:
-    ids = json.load(file)
+ids = json.loads(
+    files(__package__).joinpath("IDs.json").read_text(encoding="utf-8")
+)
 
 # Regions that exist in the world but are not playable levels:
 # no checks, no items, no "Cleared" / "Stache Quota Completed" events.

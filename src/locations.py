@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json
-from pathlib import Path
+from importlib.resources import files
 
 from typing import TYPE_CHECKING
 
@@ -9,9 +9,9 @@ from BaseClasses import ItemClassification, Location
 from .items import SmolAmeItem
 from .regions import get_included_regions, get_level_regions
 
-ids_path = Path(__file__).parent / "IDs.json"
-with ids_path.open("r", encoding="utf-8") as file:
-    ids = json.load(file)
+ids = json.loads(
+    files(__package__).joinpath("IDs.json").read_text(encoding="utf-8")
+)
 
 
 if TYPE_CHECKING:
